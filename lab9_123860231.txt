@@ -1,0 +1,36 @@
+
+PLAY [Configure Ops445 Lab VM] *******************************************************************
+
+TASK [Gathering Facts] ****************************************************************************
+ok: [vmlab]
+
+TASK [Update Apache (httpd)] *********************************************************************
+changed: [vmlab]
+
+TASK [Install EPEL repository if not already installed] ******************************************
+changed: [vmlab]
+
+TASK [Remove 'tree' package] *********************************************************************
+changed: [vmlab]
+
+TASK [Set hostname to Seneca ID] *****************************************************************
+changed: [vmlab]
+
+TASK [Create new user with Seneca ID and sudo access] *******************************************
+changed: [vmlab]
+
+TASK [Set up SSH passwordless login for new user] ***********************************************
+changed: [vmlab]
+
+TASK [Set up directories for lab work] **********************************************************
+changed: [vmlab] => (item=1)
+changed: [vmlab] => (item=2)
+changed: [vmlab] => (item=3)
+changed: [vmlab] => (item=4)
+changed: [vmlab] => (item=5)
+changed: [vmlab] => (item=6)
+changed: [vmlab] => (item=7)
+changed: [vmlab] => (item=8)
+
+PLAY RECAP ****************************************************************************************
+vmlab   : ok=8    changed=8    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0

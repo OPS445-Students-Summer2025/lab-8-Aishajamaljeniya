@@ -1,0 +1,55 @@
+
+---
+- name: Configure Ops445 Lab VM
+  hosts: ops435b
+  become: yes
+  vars:
+    apache_version: 2.6
+    motd_warning: "WARNING: used by ICT faculty/students only.
+"
+  tasks:
+    - name: Update Apache (httpd)
+      yum:
+        name: httpd
+        state: latest
+
+    - name: Install EPEL repository if not already installed
+      yum:
+        name: epel-release
+        state: present
+
+    - name: Remove 'tree' package
+      yum:
+        name: tree
+        state: absent
+
+    - name: Set hostname to Seneca ID
+      hostname:
+        name: "123860231"
+
+    - name: Create new user with Seneca ID and sudo access
+      user:
+        name: "123860231"
+        state: present
+        groups: sudo
+
+    - name: Set up SSH passwordless login for new user
+      authorized_key:
+        user: "123860231"
+        state: present
+        key: "{{ lookup('file', '/home/123860231/.ssh/id_rsa.pub') }}"
+
+    - name: Set up directories for lab work
+      file:
+        path: "/home/123860231/ops445/lab{{ item }}"
+        state: directory
+        mode: '0755'
+      loop:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
